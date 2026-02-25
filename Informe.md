@@ -37,3 +37,16 @@ Añadido tras el skip de espacios blancos
 ```jison
 "//".+                { /* skip commented */;  }
 ```
+
+## 4. Punto flotante
+
+Modificado 
+```jison
+[0-9]             { return 'NUMBER';       }
+```
+a
+```jison
+[0-9]+(\.[0-9]+)?\.?([eE][-+][0-9])?             { return 'NUMBER';       }
+```
+
+## 5. Pruebas

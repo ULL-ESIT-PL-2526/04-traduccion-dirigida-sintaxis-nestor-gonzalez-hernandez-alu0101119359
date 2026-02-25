@@ -100,6 +100,12 @@ describe('Parser Tests', () => {
       expect(parse("1000000 / 1000")).toBe(1000);
       expect(parse("99 ** 2")).toBe(9801);
     });
+
+    test('should handle floating point', () => {
+      expect(parse(" 1.5 + 2")).toBe(3.5);
+      expect(parse("2.5e-2")).toBe(0.025);
+      expect(parse("2.")).toBe(2.0);
+    });
   });
 
   describe('Input validation and error cases', () => {
@@ -110,7 +116,8 @@ describe('Parser Tests', () => {
       expect(() => parse("3 +")).toThrow();
       expect(() => parse("+ 3")).toThrow();
       expect(() => parse("3 + + 4")).toThrow();
-      expect(() => parse("3.5")).toThrow(); // Only integers are supported
+      //expect(() => parse("3.5")).toThrow(); // Float Support added
+      expect(() => parse("3..2")).toThrow();
     });
 
     test('should handle incomplete expressions', () => {
