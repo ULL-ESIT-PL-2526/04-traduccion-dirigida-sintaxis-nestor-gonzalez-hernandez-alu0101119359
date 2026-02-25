@@ -31,3 +31,9 @@ Sin esta regla se crearía un error no definido en el proceso lexico al apararec
 Con esta regla, el caracter es captado y crea error en el proceso de parse. 
 El error lo crea un token INVALID, con lo cual queda muy claro que se trata de un fallo de input.
 
+## 3. Saltar comentarios
+
+Añadido tras el skip de espacios blancos
+```jison
+"//".+                { /* skip commented */;  }
+```
