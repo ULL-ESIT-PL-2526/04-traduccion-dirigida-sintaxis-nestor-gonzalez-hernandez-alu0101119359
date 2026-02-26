@@ -25,24 +25,30 @@ describe('Parser Tests', () => {
       expect(parse("3 + 5")).toBe(8);
       expect(parse("10 + 20")).toBe(30);
       expect(parse("0 + 1")).toBe(1);
+      expect(parse("0.2 + 0.6")).toBe(0.8);
+      expect(parse("2e-2 + 3.5e+2")).toBe(350.02);
     });
 
     test('should handle subtraction', () => {
       expect(parse("10 - 3")).toBe(7);
       expect(parse("1 - 2")).toBe(-1);
       expect(parse("0 - 5")).toBe(-5);
+      expect(parse("0.2 - 0.6")).toBeCloseTo(-0.4);
+      expect(parse(" 1e+2 - 2e-2 ")).toBeCloseTo(99.98);
     });
 
     test('should handle multiplication', () => {
       expect(parse("3 * 4")).toBe(12);
       expect(parse("7 * 8")).toBe(56);
       expect(parse("0 * 10")).toBe(0);
+      expect(parse("0.5 * 0.5")).toBeCloseTo(0.25);
     });
 
     test('should handle division', () => {
       expect(parse("15 / 3")).toBe(5);
       expect(parse("20 / 4")).toBe(5);
       expect(parse("1 / 2")).toBe(0.5);
+      expect(parse("1/ 0.1")).toBeCloseTo(10);
     });
 
     test('should handle exponentiation', () => {
@@ -50,6 +56,7 @@ describe('Parser Tests', () => {
       expect(parse("3 ** 2")).toBe(9);
       expect(parse("5 ** 0")).toBe(1);
       expect(parse("10 ** 1")).toBe(10);
+      expect(parse("2 ** 0.5")).toBeCloseTo(1.41421);
     });
   });
 
