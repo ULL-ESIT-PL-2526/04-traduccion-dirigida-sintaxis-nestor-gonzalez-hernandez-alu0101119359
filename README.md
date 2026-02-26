@@ -46,7 +46,7 @@ Modificado
 ```
 a
 ```jison
-[0-9]+(\.[0-9]+)?\.?([eE][-+][0-9])?             { return 'NUMBER';       }
+[0-9]+((\.[0-9]+)|\.)?([eE][-+][0-9])?             { return 'NUMBER';       }
 ```
 
 ## 5. Pruebas
