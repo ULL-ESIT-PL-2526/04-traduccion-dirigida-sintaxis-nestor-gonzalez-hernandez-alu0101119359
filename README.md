@@ -72,6 +72,17 @@ describe('Comments', () => {
 ```
 como su propio grupo.
 
+a los respectivos grupos (según operandos) añadidos los test
+```js
+expect(parse("0.2 + 0.6")).toBe(0.8);
+expect(parse("2e-2 + 3.5e+2")).toBe(350.02);
+expect(parse("0.2 - 0.6")).toBeCloseTo(-0.4);
+expect(parse(" 1e+2 - 2e-2 ")).toBeCloseTo(99.98);
+expect(parse("0.5 * 0.5")).toBeCloseTo(0.25);
+expect(parse("1/ 0.1")).toBeCloseTo(10);
+expect(parse("2 ** 0.5")).toBeCloseTo(1.41421);
+```
+
 En grupo ```'Input validation and error cases'``` eliminado
 ```js
 expect(() => parse("3.5")).toThrow();
