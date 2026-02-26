@@ -11,6 +11,13 @@ describe('Parser Tests', () => {
       expect(parse("0")).toBe(0);
       expect(parse("123")).toBe(123);
     });
+
+    test('should handle floating point', () => {
+      expect(parse(" 1.5")).toBe(1.5);
+      expect(parse("2.5e-2")).toBe(0.025);
+      expect(parse("2.5E+2")).toBe(250);
+      expect(parse("2.")).toBe(2);
+    });
   });
 
   describe('Basic arithmetic operations', () => {
@@ -63,6 +70,14 @@ describe('Parser Tests', () => {
     });
   });
 
+  describe('Comments', () => {
+    test('should handle comments', () => {
+      expect(parse("// 1.5 + 2 \n3+3")).toBe(6);
+      expect(parse("//x +y\n 1+3\n")).toBe(4);
+      expect(parse("//x +y\n 1+3\n//12+x")).toBe(4);
+    });
+  });
+
   describe('Edge cases', () => {
     test('should handle expressions with extra whitespace', () => {
       expect(parse("  3   +   5  ")).toBe(8);
@@ -101,11 +116,6 @@ describe('Parser Tests', () => {
       expect(parse("99 ** 2")).toBe(9801);
     });
 
-    test('should handle floating point', () => {
-      expect(parse(" 1.5 + 2")).toBe(3.5);
-      expect(parse("2.5e-2")).toBe(0.025);
-      expect(parse("2.")).toBe(2.0);
-    });
   });
 
   describe('Input validation and error cases', () => {
@@ -118,6 +128,9 @@ describe('Parser Tests', () => {
       expect(() => parse("3 + + 4")).toThrow();
       //expect(() => parse("3.5")).toThrow(); // Float Support added
       expect(() => parse("3..2")).toThrow();
+      expect(() => parse("3.1.2")).toThrow();
+      expect(() => parse("3..")).toThrow();
+      expect(() => parse("3.2.e+2")).toThrow();
     });
 
     test('should handle incomplete expressions', () => {

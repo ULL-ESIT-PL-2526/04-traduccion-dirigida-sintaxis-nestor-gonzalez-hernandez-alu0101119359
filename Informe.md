@@ -50,3 +50,36 @@ a
 ```
 
 ## 5. Pruebas
+
+Añadido a grupo de tests ```describe('Basic number parsing', () => {```
+```js
+test('should handle floating point', () => {
+  expect(parse(" 1.5")).toBe(1.5);
+  expect(parse("2.5e-2")).toBe(0.025);
+  expect(parse("2.5E+2")).toBe(250);
+  expect(parse("2.")).toBe(2);
+});
+```
+ y
+ ```js
+describe('Comments', () => {
+  test('should handle comments', () => {
+    expect(parse("// 1.5 + 2 \n3+3")).toBe(6);
+    expect(parse("//x +y\n 1+3\n")).toBe(4);
+    expect(parse("//x +y\n 1+3\n//12+x")).toBe(4);
+  });
+});
+```
+como su propio grupo.
+
+En grupo ```'Input validation and error cases'``` eliminado
+```js
+expect(() => parse("3.5")).toThrow();
+```
+y añadido
+```js
+expect(() => parse("3..2")).toThrow();
+expect(() => parse("3.1.2")).toThrow();
+expect(() => parse("3..")).toThrow();
+expect(() => parse("3.2.e+2")).toThrow();
+```
